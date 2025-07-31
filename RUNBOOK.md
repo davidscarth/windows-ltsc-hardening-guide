@@ -255,7 +255,7 @@ The recommended and most secure method for activation is to use a legitimate pro
 1. Open Settings -> Update & Security -> Activation.
 2. Select "Change product key" and enter your key.
 
-For non-production, lab, or testing environments, an alternative procedure using Microsoft Activation Scripts (MAS) is documented separately. Please refer to that document for instructions.
+For non-production, lab, or testing environments, an alternative procedure using Microsoft Activation Scripts (MAS) is [documented separately](appendix/ALT-ACTIVATION.md). Please refer to that document for instructions.
 
 #### 4.5.3 One-time Windows Update
 
