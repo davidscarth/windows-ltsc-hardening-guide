@@ -245,7 +245,7 @@ The baselines leave the Windows Defender Firewall in its default state: inbound 
 **YOU MAY NOW CONNECT TO THE INTERNET**
 
 #### 4.5.1 Time and Power
-Open the "Date & time" settings and make sure your time zone is correct, and that the time is accurate. You can toggle on "Set time automatically" and then click "Sync now" to get internet time.
+Open the "Date & time" settings and make sure your time zone is correct, and that the time is accurate. You can toggle on "Set time automatically" and then click "Sync now" to get in sync with internet time servers.
 
 Open your "Power & sleep" settings. Change the power plan options to disable sleep when plugged in (for "Make my device sleep after", select "Never").
 
