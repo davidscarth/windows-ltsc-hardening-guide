@@ -214,6 +214,10 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 * **Allow network activity indicator tests:**
     * `Computer Configuration\Administrative Templates\System\Internet Communication Management\Internet Communication settings`
         * `Turn off Windows Network Connectivity Status Indicator active tests` -> **Not configured**
+* **Allow user to enable webcam and microphones:**
+    * `Computer Configuration\Administrative Templates\Windows Components\App Privacy`
+        * `Let Windows apps access the camera` -> **Enabled**, change 'Default for all apps' from "Force Deny" to **"User is in control"**
+        * `Let Windows apps access the microphone` -> **Enabled**, change 'Default for all apps' from "Force Deny" to **"User is in control"**
 
 ### 4.2.1 Registry Adjustments
 A few settings from the baselines are configured within the registry. Use the Registry Editor (`regedit.exe`) to make the following adjustments manually:
