@@ -10,7 +10,7 @@
 
    * On a machine with internet access, navigate to the official GitHub repository.
 
-   * Download the latest release ZIP file.
+   * Download the latest release ZIP file (click Code > Download ZIP).
 
    * Transfer the ZIP file to the target machine via a USB drive.
 
