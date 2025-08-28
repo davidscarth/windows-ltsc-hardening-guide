@@ -39,7 +39,7 @@
    * A menu will appear in the command prompt window.
 
    * Select the **HWID (Digital License)** activation option by entering the corresponding number and pressing `Enter`.
-
+     * If you require fully offline activation, you must use either **TSforge** or **KMS38** instead.
    * The script will perform the activation process. Follow any on-screen prompts.
 
 5. **Verification:**
