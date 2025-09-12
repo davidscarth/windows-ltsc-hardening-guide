@@ -287,11 +287,11 @@ Now create rules using powershell to enable egress for the following (this will 
 Now you will create entries for any servers or services that you use.
 We will assume all of your traffic and services will be fronted by a reverse-proxy, so you should only need to forward that additional traffic.
 
-5. Network Attached Storage (Assuming in this example a SMB share)
+5. Network Attached Storage (Assuming in this example an SMB share for two devices)
     ```powershell
     New-NetFirewallRule -DisplayName "SMB to NAS" -Dir Out -Action Allow -Protocol TCP -RemotePort 445 -RemoteAddress 10.10.20.10,10.10.20.11
     ```
-6. Caddy (Reverse Proxy, needs to access ACME API, fetch OCSP/issuer)
+6. Reverse Proxy (Using [Caddy](https://github.com/caddyserver/caddy) as an example, needs to access ACME API, fetch OCSP/issuer)
     ```powershell
     New-NetFirewallRule -DisplayName "Caddy ACME/Cloudflare" -Dir Out -Action Allow -Program "C:\Program Files\Caddy\caddy.exe" -Protocol TCP -RemotePort 80,443
     ```
