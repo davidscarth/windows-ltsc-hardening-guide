@@ -112,6 +112,7 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
     * If you have existing partitions, delete them all until you only have "Drive 0 Unallocated Space". Select it and click **Next**.
 9.  **Install Windows:** The installation process will start, and the computer will restart as needed.
 10. **Out-of-Box Experience (OOBE):**
+    * Windows 11 only: Select your region and confirm your keyboard layout if prompted.
     * **Network:** Select “I don’t have internet” and then either “Continue with limited setup” (Windows 10) or "I don’t have internet" again (Windows 11).
     * **Account:** Create a local administrator account.
         * Use a generic name (not “Admin” or “Administrator”).
