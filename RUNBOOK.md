@@ -101,7 +101,7 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
 ### 3.3 Installation Process
 1.  **Boot from USB:** The computer should now boot from the USB drive.
 2.  **Language and preferences:** Select your language, time format, and keyboard input, then click **Next**.
-    * Windows 11 only: After selecting your "Keyboard or input method", click on "Previous Version of Setup" and start from there.
+    * Windows 11 only: After selecting your "Keyboard or input method", click on "Previous Version of Setup" and then re-select your language, time format, and keyboard input.
 3.  **Install now:** Click the **Install now** button.
 4.  **Product key:** Select “I don’t have a product key”. We will activate Windows later.
 5.  **Operating system:** Choose `Windows 10 (or 11) IoT Enterprise LTSC` and click **Next**.
