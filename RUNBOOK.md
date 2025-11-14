@@ -1,7 +1,7 @@
 # Runbook: A Hardening Guide for Windows IoT Enterprise LTSC
-**Version:** 1.1.1
+**Version:** 1.1.2
 
-**Date:** August 10, 2025
+**Date:** November 14, 2025
 
 ---
 ## 1.0 Introduction and Scope
