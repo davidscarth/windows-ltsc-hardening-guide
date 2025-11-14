@@ -117,7 +117,7 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
         * Use a generic name (not “Admin” or “Administrator”).
         * Use a strong, randomly generated passphrase and store it in a password manager.
         * For the security questions, use a random password generator for the answers and store them securely.
-            * To avoid security questions, instead leave the password <blank> during setup, and create one later.
+            * To avoid the security questions requirement, instead leave the password **blank** during setup, and create one after first boot. You will find it in Settings > Accounts > Sign-in options > Password. You can make the required password hint a single space " " to represent empty.
     * **Privacy settings:** Toggle each option off and select **Accept**.
 
 ---
