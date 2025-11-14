@@ -101,6 +101,7 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
 ### 3.3 Installation Process
 1.  **Boot from USB:** The computer should now boot from the USB drive.
 2.  **Language and preferences:** Select your language, time format, and keyboard input, then click **Next**.
+        * Windows 11 only: After selecting your "Keyboard or input method", click on "Previous Version of Setup" and start from there.
 3.  **Install now:** Click the **Install now** button.
 4.  **Product key:** Select “I don’t have a product key”. We will activate Windows later.
 5.  **Operating system:** Choose `Windows 10 (or 11) IoT Enterprise LTSC` and click **Next**.
@@ -111,11 +112,12 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
     * If you have existing partitions, delete them all until you only have "Drive 0 Unallocated Space". Select it and click **Next**.
 9.  **Install Windows:** The installation process will start, and the computer will restart as needed.
 10. **Out-of-Box Experience (OOBE):**
-    * **Network:** Select “I don’t have internet” and then “Continue with limited setup”.
+    * **Network:** Select “I don’t have internet” and then either “Continue with limited setup” (Windows 10) or "I don’t have internet" again (Windows 11).
     * **Account:** Create a local administrator account.
         * Use a generic name (not “Admin” or “Administrator”).
         * Use a strong, randomly generated passphrase and store it in a password manager.
         * For the security questions, use a random password generator for the answers and store them securely.
+            * To avoid security questions, instead leave the password <blank> during setup, and create one later.
     * **Privacy settings:** Toggle each option off and select **Accept**.
 
 ---
