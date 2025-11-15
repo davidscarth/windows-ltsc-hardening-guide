@@ -215,6 +215,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
         * `Deny write access to removable drivers not protected by BitLocker` -> **Not Configured**
 
 #### Optional Adjustments
+These are quality-of-life changes for end user workstations.
 * **Do not include drivers with Windows Updates:**
     * `Computer Configuration\Administrative Templates\Windows Components\Windows Update`
         * `Do not include drivers with Windows Updates` -> **Enabled**
