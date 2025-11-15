@@ -242,7 +242,7 @@ A few settings from the baselines are configured within the registry. Use the Re
     * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPL` set to `1`
     * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPLBoot` set to `1`
 * **Enable opportunistic SMB signing (server side)** (It's already set as required, this is housekeeping)
-    * Modify registry DWORD 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\enablesecuritysignature' from `0` to `1'.
+    * Modify registry DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\enablesecuritysignature` from `0` to `1`.
 * **Re-enable Microsoft Edge updates:**
     * Delete registry key: `HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate`
     * Delete registry key: `HKLM\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev`
