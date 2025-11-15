@@ -77,14 +77,15 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
 ## 3.0 Installation of Windows
 
 ### 3.1 Create a Bootable USB Drive
-1.  **Download Rufus:** Download the Rufus v4.7p (rufus-4.7p.exe) from the [official website](https://rufus.ie/downloads/).
+1.  **Download Rufus:** Download the Rufus v4.7p from the [official website](https://rufus.ie/downloads/).
+    * Filename: ```rufus-4.7p.exe```, CRC-32: ```244d8a75```
 2.  **Launch Rufus** and configure it with the following settings:
     * **Device:** Select your USB flash drive.
     * **Boot selection:** Click `SELECT` and browse to your Windows IoT LTSC ISO file.
     * **Image option:** "Standard Windows installation".
     * **Partition scheme:** `GPT`.
     * **Target system:** `UEFI (non CSM)`.
-3.  **Click START**. A warning will appear that all data on the USB drive will be destroyed. Click `OK` to continue.
+3.  **Click START**. A set of customization options will appear, uncheck all and click 'OK'. A warning will appear that all data on the USB drive will be destroyed. Click `OK` to continue.
 4.  Wait for the process to complete and close Rufus.
 
 ### 3.2 BIOS/UEFI Configuration
