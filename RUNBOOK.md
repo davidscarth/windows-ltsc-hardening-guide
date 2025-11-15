@@ -226,8 +226,8 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
         * `Let Windows apps access the camera` -> **Enabled**, change 'Default for all apps' from "Force Deny" to **"User is in control"**
         * `Let Windows apps access the microphone` -> **Enabled**, change 'Default for all apps' from "Force Deny" to **"User is in control"**
 * **Re-enable Windows Store** (run "wsreset -i" from elevated command prompt to install Windows Store after changes are applied)
-Computer Configuration\Administrative Templates\Windows Components\Store
-    Disable all apps from Microsoft Store (change from Disabled to Not Configured)
+    * `Computer Configuration\Administrative Templates\Windows Components\Store`
+        * `Disable all apps from Microsoft Store` -> **Not Configured**
 
 ### 4.2.1 Registry Adjustments
 A few settings from the baselines are configured within the registry. Use the Registry Editor (`regedit.exe`) to make the following adjustments manually:
