@@ -78,7 +78,7 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
 
 ### 3.1 Create a Bootable USB Drive
 1.  **Download Rufus:** Download the Rufus v4.7p from the [official website](https://rufus.ie/downloads/).
-    * Filename: `rufus-4.7p.exe` Size: `1,60 MB (1.687.344 bytes)` CRC-32: `244d8a75` MD5: `f052acd38a010b6a1ffa26fdc229a229`
+    * Filename: `rufus-4.7p.exe` Size: `1.60 MB (1,687,344 bytes)` CRC-32: `244d8a75` MD5: `f052acd38a010b6a1ffa26fdc229a229`
 2.  **Launch Rufus** and configure it with the following settings:
     * **Device:** Select your USB flash drive.
     * **Boot selection:** Click `SELECT` and browse to your Windows IoT LTSC ISO file.
@@ -143,7 +143,7 @@ We will apply two baselines sequentially: first, the general security baseline, 
     <ins>Windows 10:</ins>
     * Download the ["Windows 10 version 21H2 Security Baseline.zip"](https://www.microsoft.com/en-us/download/details.aspx?id=55319) and extract the contents of the `Windows-10-v21H2-Security-Baseline` folder to `C:\Temp\Baselines\Security`.
     * Download the [Restricted Traffic Limited Functionality Baseline from Archive.org](https://web.archive.org/web/20230601002534/https://download.microsoft.com/download/D/9/0/D905766D-FEDA-43E5-86ED-8987CEBD8D89/WindowsRTLFB.zip) (as Microsoft removed the required version). Extract the contents of the `Enterprise` folder from 'Version 21H2_Win10' to `C:\Temp\Baselines\Privacy`.
-        * Filename: `WindowsRTLFB.zip` Size: `743 KB (761.507 bytes)` CRC-32: `be9d9228` MD5: `26d8fe1a999fae5b746dce2ec13ca241`
+        * Filename: `WindowsRTLFB.zip` Size: `743 KB (761,507 bytes)` CRC-32: `be9d9228` MD5: `26d8fe1a999fae5b746dce2ec13ca241`
     <ins>Windows 11:</ins>
     * Download the ["Windows 11 v24H2 Security Baseline.zip"](https://www.microsoft.com/en-us/download/details.aspx?id=55319) and extract the contents of the `Windows 11 v24H2 Security Baseline` folder to `C:\Temp\Baselines\Security`.
     * Download the [Restricted Traffic Limited Functionality Baseline](https://download.microsoft.com/download/D/9/0/D905766D-FEDA-43E5-86ED-8987CEBD8D89/WindowsRTLFB.zip). Extract the contents of the `Enterprise` folder from `Version 23H2_Win11` to `C:\Temp\Baselines\Privacy`.
