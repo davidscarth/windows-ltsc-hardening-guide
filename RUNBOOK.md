@@ -208,7 +208,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 * **Enhance BitLocker encryption strength:**
     * `Computer Configuration\Administrative Templates\Windows Components\BitLocker Drive Encryption`
         * `Choose drive encryption method and cipher strength (Windows 10 (Version 1511) and later)` -> **Enabled**
-        * Set encryption method for 'Operating System' and 'Fixed Data Drives' to **"XTS-AES 256-bit"**.
+            * Set encryption method for 'Operating System' and 'Fixed Data Drives' to **"XTS-AES 256-bit"**.
 * **Disable "Block untrusted and unsigned processes that run from USB" (ASR Rule):**
     * `Computer Configuration\Administrative Templates\Windows Components\Microsoft Defender Antivirus\Microsoft Defender Exploit Guard\Attack Surface Reduction`
         * `Configure Attack Surface Reduction rules` -> Click 'Show...' -> Delete the rule for `"b2b3f03d-6a65-4f7b-a9c7-1c7ef74a9ba4"` by erasing the Value Name and Value and hit 'OK'.
