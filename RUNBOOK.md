@@ -1,7 +1,7 @@
 # Runbook: A Hardening Guide for Windows IoT Enterprise LTSC
-**Version:** 1.1.2
+**Version:** 1.1.4
 
-**Date:** November 14, 2025
+**Date:** November 15, 2025
 
 ---
 ## 1.0 Introduction and Scope
@@ -215,6 +215,13 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 * **Disable "Deny write access to fixed drives not protected by BitLocker":**
     * `Computer Configuration\Administrative Templates\Windows Components\BitLocker Drive Encryption\Removable Data Drives`
         * `Deny write access to removable drivers not protected by BitLocker` -> **Not Configured**
+* **Align Password requirements to NIST 800-63B:**
+    * `Computer Configuration\Windows Settings\Security Settings\Account Policies\Password Policy`
+        * `Enforce password history` -> **Disabled**
+        * `Minimum password age` -> **0**
+        * `Maximum password age` -> **0 days**
+        * `Minimum password length` -> **8 characters**
+        * `Password must meet complexity requirements` -> **Disabled**
 
 #### Optional Adjustments
 These are quality-of-life changes for end user workstations.
@@ -240,7 +247,7 @@ A few settings from the baselines are configured within the registry. Use the Re
 #### Security Baseline Tweaks
 * **Enable Local Security Authority (LSA) Protection** (On by default in Windows 11, but we need to enable it in Windows 10)
     * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPL` set to `1`
-    * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPLBoot` set to `1`
+    * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPLBoot` set to `2`
 * **Enable opportunistic SMB signing (server side)** (It's already set as required, this is housekeeping)
     * Modify registry DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\enablesecuritysignature` from `0` to `1`.
 * **Re-enable Microsoft Edge updates:**
