@@ -219,7 +219,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 #### Optional Adjustments
 These are quality-of-life changes for end user workstations.
 * **Do not include drivers with Windows Updates:**
-    * W10: `Computer Configuration\Administrative Templates\Windows Components\Windows Update
+    * W10: `Computer Configuration\Administrative Templates\Windows Components\Windows Update`
     * W11: `Computer Configuration\Administrative Templates\Windows Components\Windows Update\Manage updates offered from Windows Update`
         * `Do not include drivers with Windows Updates` -> **Enabled**
 * **Allow network activity indicator tests:**
