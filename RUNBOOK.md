@@ -311,7 +311,7 @@ We will assume all of your traffic and services will be fronted by a reverse-pro
     ```powershell
     manage-bde -on C: -RecoveryPassword
     ```
-2.  **CRITICAL:** Immediately copy the 48-digit Recovery Key ("Password") and store it in a secure, separate location like a password manager. Failure to do so will result in permanent data loss.
+2.  **CRITICAL:** Immediately copy the 48-digit Recovery Key ("Password") and store it in a secure, separate location like a password manager. Failure to do so may result in permanent data loss.
 3.  Check progress with `manage-bde -status C:`.
 
 ### 4.5 OS Activation and Housekeeping
