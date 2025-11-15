@@ -192,7 +192,8 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
     * `Computer Configuration\Administrative Templates\System\Internet Communication Management\Internet Communication settings`
         * `Turn off access to all Windows Update features` -> **Not Configured**
         * `Turn off Automatic Root Certificates Update` -> **Not Configured**
-    * `Computer Configuration\Administrative Templates\Windows Components\Windows Update` (in Windows 11 these will be under the `Manage updates offered from Windows Server Update Service` subfolder)
+    * W10: `Computer Configuration\Administrative Templates\Windows Components\Windows Update`
+    * W11: `Computer Configuration\Administrative Templates\Windows Components\Windows Update\Manage updates offered from Windows Server Update Service`
         * `Specify intranet Microsoft update service location` -> **Not Configured**
         * `Do not connect to any Windows Update Internet locations` -> **Not Configured**
 * **Re-enable Defender signature updates:**
@@ -200,7 +201,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
         * `Define file shares for downloading security intelligence updates` -> **Not Configured**
         * `Define the order of sources for downloading security intelligence updates` -> **Not Configured**
 * **Re-enable Windows Time service:**
-    * `Computer Configuration\Administrative Templates\System\Windows Time Service\Time Providers`
+    * W10: `Computer Configuration\Administrative Templates\System\Windows Time Service\Time Providers`
         * `Enable Windows NTP Client` -> **Enabled**
 
 #### Security Baseline Adjustments
@@ -218,7 +219,8 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 #### Optional Adjustments
 These are quality-of-life changes for end user workstations.
 * **Do not include drivers with Windows Updates:**
-    * `Computer Configuration\Administrative Templates\Windows Components\Windows Update`  (in Windows 11 this will be under the `Manage updates offered from Windows Update` subfolder)
+    * W10: `Computer Configuration\Administrative Templates\Windows Components\Windows Update
+    * W11: `Computer Configuration\Administrative Templates\Windows Components\Windows Update\Manage updates offered from Windows Update`
         * `Do not include drivers with Windows Updates` -> **Enabled**
 * **Allow network activity indicator tests:**
     * `Computer Configuration\Administrative Templates\System\Internet Communication Management\Internet Communication settings`
