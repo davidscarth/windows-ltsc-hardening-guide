@@ -229,9 +229,10 @@ These are quality-of-life changes for end user workstations.
     * `Computer Configuration\Administrative Templates\Windows Components\App Privacy`
         * `Let Windows apps access the camera` -> **Enabled**, change 'Default for all apps' from "Force Deny" to **"User is in control"**
         * `Let Windows apps access the microphone` -> **Enabled**, change 'Default for all apps' from "Force Deny" to **"User is in control"**
-* **Re-enable Windows Store** (run "wsreset -i" from elevated command prompt to install Windows Store after changes are applied)
+* **Re-enable Windows Store, prevent OS Updates** (run "wsreset -i" from elevated command prompt to install Windows Store after changes are applied)
     * `Computer Configuration\Administrative Templates\Windows Components\Store`
         * `Disable all apps from Microsoft Store` -> **Not Configured**
+        * `Turn off the offer to update to the latest version of Windows` -> **Enabled**
 
 ### 4.2.1 Registry Adjustments
 A few settings from the baselines are configured within the registry. Use the Registry Editor (`regedit.exe`) to make the following adjustments manually:
