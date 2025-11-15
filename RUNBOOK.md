@@ -201,7 +201,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
         * `Define file shares for downloading security intelligence updates` -> **Not Configured**
         * `Define the order of sources for downloading security intelligence updates` -> **Not Configured**
 * **Re-enable Windows Time service:**
-    * W10: `Computer Configuration\Administrative Templates\System\Windows Time Service\Time Providers`
+    * `Computer Configuration\Administrative Templates\System\Windows Time Service\Time Providers`
         * `Enable Windows NTP Client` -> **Enabled**
 
 #### Security Baseline Adjustments
