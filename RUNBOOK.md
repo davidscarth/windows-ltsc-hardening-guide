@@ -155,7 +155,7 @@ We will apply two baselines sequentially: first, the general security baseline, 
 
 2.  **Open PowerShell as Administrator** and set the execution policy:
     ```powershell
-    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+    Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
     ```
     When prompted to confirm the change, type **Y** and press **Enter**. The command is scoped for this session only.
     
