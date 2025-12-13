@@ -144,6 +144,7 @@ We will apply two baselines sequentially: first, the general security baseline, 
     * Download the ["Windows 10 version 21H2 Security Baseline.zip"](https://www.microsoft.com/en-us/download/details.aspx?id=55319) and extract the contents of the `Windows-10-v21H2-Security-Baseline` folder to `C:\Temp\Baselines\Security`.
     * Download the [Restricted Traffic Limited Functionality Baseline from Archive.org](https://web.archive.org/web/20230601002534/https://download.microsoft.com/download/D/9/0/D905766D-FEDA-43E5-86ED-8987CEBD8D89/WindowsRTLFB.zip) (as Microsoft removed the required version). Extract the contents of the `Enterprise` folder from 'Version 21H2_Win10' to `C:\Temp\Baselines\Privacy`.
         * Filename: `WindowsRTLFB.zip` Size: `743 KB (761,507 bytes)` CRC-32: `be9d9228` MD5: `26d8fe1a999fae5b746dce2ec13ca241`
+
     <ins>Windows 11:</ins>
     * Download the ["Windows 11 v24H2 Security Baseline.zip"](https://www.microsoft.com/en-us/download/details.aspx?id=55319) and extract the contents of the `Windows 11 v24H2 Security Baseline` folder to `C:\Temp\Baselines\Security`.
     * Download the [Restricted Traffic Limited Functionality Baseline](https://download.microsoft.com/download/D/9/0/D905766D-FEDA-43E5-86ED-8987CEBD8D89/WindowsRTLFB.zip). Extract the contents of the `Enterprise` folder from `Version 23H2_Win11` to `C:\Temp\Baselines\Privacy`.
