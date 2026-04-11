@@ -90,7 +90,7 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
 
 ### 3.2 BIOS/UEFI Configuration
 1.  **Access UEFI/BIOS:** Power on the target computer and press the appropriate key (typically `F2`, `F10`, `F12`, or `DEL`) to enter the UEFI/BIOS setup.
-2.  **Set a UEFI/BIOS Administrator Password:** This prevents unauthorized changes to firmware settings. Store this password securely.
+2.  **Set a UEFI/BIOS Administrator Password:** This prevents unauthorized changes to firmware settings. Store this password securely in your password manager.
 3.  **Enable UEFI Mode:** Ensure the system is set to boot in UEFI mode (not MBR or Legacy mode).
 4.  **Enable Secure Boot:** This is mandatory.
 5.  **Enable Virtualization Technology:** Enable Intel VT-x / AMD-V, and also VT-d / IOMMU if available.
@@ -121,14 +121,15 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
         * For the security questions, use a random password generator for the answers and store them securely.
             * To avoid the security questions requirement, instead leave the password **blank** during setup, and create one after first boot. You will find it in Settings > Accounts > Sign-in options > Password. You can make the required password hint a single space " " to represent empty.
     * **Privacy settings:** Toggle each option off and select **Accept**.
-11. **If you skipped the OOBE password screen to avoid filling in security questions, you must set a password. Settings > Accounts > Sign-in options > Password. Store it within your password manager.**
-
+11. **If you skipped the OOBE password screen to avoid filling in security questions, you must set a password.** You can add one by going to Settings > Accounts > Sign-in options > Password. Store it within your password manager.
 ---
 ## 4.0 Post-Installation Hardening and Configuration
 > **IMPORTANT:** Do not connect the machine to the network until this phase is complete. All required drivers and tools should be downloaded on a separate, trusted computer and transferred via USB.
- 
+
+1. Now that Windows is installed, boot into BIOS and set the boot order so that your primary internal boot drive is first. (Disable network boot, boot from USB, etc.)
+
 ### 4.1 Firmware and Drivers
-1.  **Update Firmware:** Download and install the latest system BIOS and any other available firmware updates if available (TPM module, Thunderbolt controller, etc.).
+1.  **Update Firmware:** Download and install the latest system BIOS and any other available firmware updates (TPM module, Thunderbolt controller, etc.).
 2.  **Install Drivers:** Download and install the latest official chipset, graphics, and network drivers from the manufacturer's website.
 3.  **Check Device Manager:** Right-click the Start button, select **Device Manager**, and look for any devices with a yellow exclamation mark. Obtain any missing drivers from official sources and install them.
 
@@ -148,9 +149,9 @@ We will apply two baselines sequentially: first, the general security baseline, 
 
     <ins>Windows 11:</ins>
     * Download the ["Windows 11 v24H2 Security Baseline.zip"](https://www.microsoft.com/en-us/download/details.aspx?id=55319) and extract the contents of the `Windows 11 v24H2 Security Baseline` folder to `C:\Temp\Baselines\Security`.
-    * Download the [Restricted Traffic Limited Functionality Baseline](https://download.microsoft.com/download/D/9/0/D905766D-FEDA-43E5-86ED-8987CEBD8D89/WindowsRTLFB.zip). Extract the contents of the `Enterprise` folder from `Version 23H2_Win11` to `C:\Temp\Baselines\Privacy`.
+    * Download the [Restricted Traffic Limited Functionality Baseline](https://download.microsoft.com/download/D/9/0/D905766D-FEDA-43E5-86ED-8987CEBD8D89/WindowsRTLFB.zip). Extract the contents of the `Enterprise` folder from `Version 23H2_Win11` to `C:\Temp\Baselines\Privacy` (the 23H2 version is the latest available and is compatible with 24H2).
     
-    <ins>GPO Tool:</ins>:
+    <ins>GPO Tool:</ins>
     * Download [LGPO.exe](https://www.microsoft.com/en-us/download/details.aspx?id=55319).
     * Copy `LGPO.exe` to `C:\Temp\Baselines\Security\Scripts\Tools\`.
 
@@ -211,7 +212,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
     * `Computer Configuration\Administrative Templates\Windows Components\BitLocker Drive Encryption`
         * `Choose drive encryption method and cipher strength (Windows 10 (Version 1511) and later)` -> **Enabled**
             * Set encryption method for 'Operating System' and 'Fixed Data Drives' to **"XTS-AES 256-bit"**.
-* **Disable "Deny write access to fixed drives not protected by BitLocker":**
+* **Disable "Deny write access to removable drives not protected by BitLocker":**
     * `Computer Configuration\Administrative Templates\Windows Components\BitLocker Drive Encryption\Removable Data Drives`
         * `Deny write access to removable drives not protected by BitLocker` -> **Not Configured**
 * **Align Password requirements to NIST 800-63B:**
@@ -346,6 +347,8 @@ Open the "Date & time" settings and make sure your time zone is correct, and tha
 
 Open your "Power & sleep" settings. Change the power plan options to disable sleep when plugged in (for "Make my device sleep after", select "Never").
 
+> Special note for laptops: A laptop that needs to go into a low-power state to save battery should hibernate instead of sleep. Consider your timeout length for hibernation to balance usability and battery life, or shut down the laptop when not in use. Use "[powercfg.exe /hibernate on](https://learn.microsoft.com/en-us/troubleshoot/windows-client/setup-upgrade-and-drivers/disable-and-re-enable-hibernation)" on Windows 11 to re-enable.
+
 #### 4.5.2 Activation
 The recommended and most secure method for activation is to use a legitimate product key obtained through official channels (e.g., Volume Licensing, Visual Studio Subscription).
 
@@ -366,7 +369,7 @@ The baselines are applied, tweaks were made, you may now delete the "C:\Temp" fo
 
 ## 5.0 Final Words
 
-This guide helps you get to a secure baseline to start from, but it is not a self-maintaining ecosystem. You will need to still need to think and act with security in mind as you use your newly set-up device.
+This guide helps you get to a secure baseline to start from, but it is not a self-maintaining ecosystem. You will need to still think and act with security in mind as you use your newly set-up device.
 
 Now that you have a hardened machine, remember to logout of the administrator account and log back in using your standard user account.
 
