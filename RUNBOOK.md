@@ -336,14 +336,14 @@ net user YourUsername * /add
 net localgroup Users
 ```
 
-### 4.4 OS Activation and Housekeeping
+### 4.5 OS Activation and Housekeeping
 **YOU MAY NOW CONNECT TO THE INTERNET**
-#### 4.4.1 Time and Power
+#### 4.5.1 Time and Power
 Open the "Date & time" settings and make sure your time zone is correct, and that the time is accurate. You can toggle on "Set time automatically" and then click "Sync now" to get in sync with internet time servers.
 
 Open your "Power & sleep" settings. Change the power plan options to disable sleep when plugged in (for "Make my device sleep after", select "Never").
 
-#### 4.4.2 Activation
+#### 4.5.2 Activation
 The recommended and most secure method for activation is to use a legitimate product key obtained through official channels (e.g., Volume Licensing, Visual Studio Subscription).
 
 1. Open Settings -> Update & Security -> Activation.
@@ -351,13 +351,13 @@ The recommended and most secure method for activation is to use a legitimate pro
 
 For non-production, lab, or testing environments, an alternative procedure using Microsoft Activation Scripts (MAS) is [documented separately](appendix/ALT-ACTIVATION.md). Please refer to that document for instructions.
 
-#### 4.4.3 One-time Windows Update
+#### 4.5.3 One-time Windows Update
 
 We will run Windows update initially to get to the most current security patch level, and rely on auto-updates going forward.
 
 Go to Settings, "Update & Security", and in "Windows Update" you will click "Check for updates". Allow updates to download and install. Once the updates finish, you may click "Restart now" or restart your machine to apply them.
 
-#### 4.4.4 Misc Cleanup
+#### 4.5.4 Misc Cleanup
 
 The baselines are applied, tweaks were made, you may now delete the "C:\Temp" folder to tidy things up.
 
