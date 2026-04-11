@@ -280,7 +280,7 @@ Open PowerShell as Administrator and perform the following:
 cd "C:\path\to\the\script"
 
 # 2. Set the execution policy
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 
 # 3. Run the script
 .\firewall.ps1
@@ -324,9 +324,20 @@ We will assume all of your traffic and services will be fronted by a reverse-pro
 2.  **CRITICAL:** Immediately copy the 48-digit Recovery Key ("Password") and store it in a secure, separate location like a password manager. Failure to do so may result in permanent data loss.
 3.  Check progress with `manage-bde -status C:`.
 
+#### 4.4 Create standard user account
+This will be your daily driver. You will log into your workstation as a standard user and only elevate rights when needed (i.e. to install or update a driver, install or uninstall an application).
+
+From Command Line:
+```powershell
+# Create the standard user (during this you will be prompted to enter the password)
+net user YourUsername * /add
+
+# Verify they're in Users group only (they are by default)
+net localgroup Users
+```
+
 ### 4.4 OS Activation and Housekeeping
 **YOU MAY NOW CONNECT TO THE INTERNET**
-
 #### 4.4.1 Time and Power
 Open the "Date & time" settings and make sure your time zone is correct, and that the time is accurate. You can toggle on "Set time automatically" and then click "Sync now" to get in sync with internet time servers.
 
@@ -346,27 +357,15 @@ We will run Windows update initially to get to the most current security patch l
 
 Go to Settings, "Update & Security", and in "Windows Update" you will click "Check for updates". Allow updates to download and install. Once the updates finish, you may click "Restart now" or restart your machine to apply them.
 
-#### 4.4.4 Create standard user account
+#### 4.4.4 Misc Cleanup
 
-This will be your daily driver. You will log into your workstation as a standard user and only elevate rights when needed (i.e. to install or update a driver, install or uninstall an application).
-
-From Command Line:
-```powershell
-# Create the standard user (during this you will be prompted to enter the password)
-net user YourUsername * /add
-
-# Verify they're in Users group only (they are by default)
-net localgroup Users
-```
-From GUI if you prefer (W11):  
-Start > "All" > Settings > Accounts > "Other Users"  
-Select "Add Account"  
-Click "I don't have this person's sign-in information" and then "Add a user without a Microsoft account"  
-Enter a Username and Password. In Windows 11 this prompt forces security questions as well, you should use random diceware passphrases for each and store them in the notes section of your password manager, not real answers.
+The baselines are applied, tweaks were made, you may now delete the "C:\Temp" folder to tidy things up.
 
 ### 5. Final Words
 
 This guide helps you get to a secure baseline to start from, but it is not a self-maintaining ecosystem. You will need to still need to think and act with security in mind as you use your newly set-up device.
+
+Now that you have a hardened machine, remember to logout of the administrator account and log back in using your standard user account.
 
 **Use trustworthy software:** Obtain legitimate software from official or trusted sources.
 
