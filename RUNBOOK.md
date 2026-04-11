@@ -1,5 +1,5 @@
 # Runbook: A Hardening Guide for Windows IoT Enterprise LTSC
-**Version:** 1.1.5
+**Version:** 1.2.0
 
 **Date:** April 11, 2026
 
@@ -7,7 +7,7 @@
 ## 1.0 Introduction and Scope
 This runbook provides a foundational, step-by-step guide for deploying a security-hardened Windows IoT Enterprise LTSC (10 or 11) machine. It is designed for those who want to go beyond default settings to build a resilient and practical daily-use computer.
 
-Whether you are a security-conscious user building a personal machine, a small business IT admin creating a secure baseline for your company, or a cybersecurity professional looking for a hands-on guide, this document provides a robust template.  To use this guide, you should have a working familiarity with Windows environments, general knowledge of computer hardware, and be comfortable using command-line interfaces.
+Whether you are a security-conscious user building a personal machine, a small business IT admin creating a secure baseline for your company, or a cybersecurity professional looking for a hands-on guide, this document provides a robust template. To use this guide, you should have a working familiarity with Windows environments, general knowledge of computer hardware, and be comfortable using command-line interfaces.
 
 While the primary focus is on workstations, the principles and techniques are foundational. Specific callouts for hardening a low-touch, purpose-built server (ideal for a home lab operator or other dedicated projects) are included as clearly marked deviations. Ultimately, this guide is for anyone who understands that security is a process of managing risk without crippling usability.
 
@@ -28,14 +28,14 @@ A computer that meets or exceeds the minimum requirements for Windows, and suppo
 | Component | Minimum Requirement | Rationale |
 |---|---|---|
 | **Processor** | Intel Core i7 or i9 (11th Gen or newer) or AMD Ryzen 5000 series (Zen 3 or newer)|	Required for Virtualization-Based Security (VBS) performance. |
-| **RAM** | 32 GB memory (ideally 64 GB+) | VBS and containerization have memory overhead. |
+| **RAM** | 16 GB memory (ideally 32 GB+) | VBS and containerization have memory overhead. |
 | **OS Drive** | 512 GB or larger NVMe SSD | Provides ample storage and performance. |
 | **Firmware** | UEFI with Secure Boot | Ensures a trusted boot chain from hardware to OS. |
 | **TPM** | TPM 2.0 (Discrete or Firmware-based) | Provides a root of trust for measurements and key protection (for BitLocker). |
 
 ### 2.2 Software & OS Image Integrity
 * **Operating System:**
-    * A legitimate copy of Windows 10/11 IoT Enterprise LTSC obtained from a trusted source, such as the Microsoft 365 Admin Center or a Visual Studio (MSDN) subscription.
+    * A copy of Windows 10/11 IoT Enterprise LTSC obtained from a trusted source, such as the Microsoft 365 Admin Center or a Visual Studio (MSDN) subscription.
 * **Security Suite:**
    * Microsoft Defender Antivirus for protection against viruses or malicious code (built-in to Windows).
    * Windows Defender Firewall for protection from unsolicited traffic (built-in to Windows).
@@ -72,13 +72,13 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
 * Windows 10 or 11 IoT Enterprise LTSC ISO file
 * USB Flash Drive (This drive will be formatted, so ensure there is no important data on it)
 * A working computer to create the bootable USB drive and copy software/drivers onto it.
-
+* A password manager such as [KeePassXC](https://keepassxc.org/) (local) or [Bitwarden](https://bitwarden.com/)/[1Password](https://1password.com/) (cloud-based). You should use passphrases of four or more random words (e.g. "[grove queasy grout icing](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases)") and store them using your password manager. You may use the password manager built-in password generator for this.
 ---
 ## 3.0 Installation of Windows
 
 ### 3.1 Create a Bootable USB Drive
-1.  **Download Rufus:** Download the Rufus v4.7p from the [official website](https://rufus.ie/downloads/).
-    * Filename: `rufus-4.7p.exe` Size: `1.60 MB (1,687,344 bytes)` CRC-32: `244d8a75` MD5: `f052acd38a010b6a1ffa26fdc229a229` SHA256: `45777d818fc9ba187bcc7b930583764130ea71100fd9e3c66d4a7143bdbce4c5`
+1.  **Download Rufus:** Download the Rufus v4.13p from the [official website](https://rufus.ie/downloads/).
+    * Filename: `rufus-4.13p.exe` Size: `1.85 MB (1,946,984 bytes)` CRC-32: `30793046` MD5: `d9c4cd467677e8bb23d8d1c2350e08e3` SHA256: `a314db019d608e3d9b2eda797ba5bbe4dfc91bcd621decd144a580080eb13b1b`
 2.  **Launch Rufus** and configure it with the following settings:
     * **Device:** Select your USB flash drive.
     * **Boot selection:** Click `SELECT` and browse to your Windows IoT LTSC ISO file.
@@ -117,10 +117,11 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
     * **Network:** Select “I don’t have internet” and then either “Continue with limited setup” (Windows 10) or "I don’t have internet" again (Windows 11).
     * **Account:** Create a local administrator account.
         * Use a generic name (not “Admin” or “Administrator”).
-        * Use a strong, randomly generated passphrase and store it in a password manager.
+        * Use a strong, randomly generated passphrase and store it in your password manager.
         * For the security questions, use a random password generator for the answers and store them securely.
             * To avoid the security questions requirement, instead leave the password **blank** during setup, and create one after first boot. You will find it in Settings > Accounts > Sign-in options > Password. You can make the required password hint a single space " " to represent empty.
     * **Privacy settings:** Toggle each option off and select **Accept**.
+11. **If you skipped the OOBE password screen to avoid filling in security questions, you must set a password. Settings > Accounts > Sign-in options > Password. Store it within your password manager.**
 
 ---
 ## 4.0 Post-Installation Hardening and Configuration
@@ -218,10 +219,10 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
         * `Enforce password history` -> **Disabled**
         * `Minimum password age` -> **0**
         * `Maximum password age` -> **0 days**
-        * `Minimum password length` -> **8 characters**
+        * `Minimum password length` -> **15 characters**
         * `Password must meet complexity requirements` -> **Disabled**
 
-*NIST 800-63B discourages traditional complexity rules (uppercase, symbols, forced rotation) because they lead to predictable patterns. Instead, it emphasizes password length as the primary measure of strength. You should use passphrases of four or more random words (e.g. "[grove queasy grout icing](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases)") and store them in a password manager such as [KeePassXC](https://keepassxc.org/) (local) or [Bitwarden](https://bitwarden.com/)/[1Password](https://1password.com/) (cloud-based). You may consider raising the minimum password length policy to 15 characters to enforce this in practice.*
+*NIST 800-63B discourages traditional complexity rules (uppercase, symbols, forced rotation) because they lead to predictable patterns. Instead, it emphasizes password length as the primary measure of strength. You may consider lowering the minimum password length policy to 8 characters if you implement a password filter that checks against known-compromised passwords (e.g., OpenPasswordFilter).*
 
 **Optional Adjustments (Workstation)**
 These are quality-of-life changes for end user workstations and personal use machines. Not recommended to apply to servers.
@@ -287,7 +288,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 ```
 Now create rules using powershell to enable egress for the following (this will be your base allowlist):
 
-1. Name resolution (DNS) (assuming DNS is handled by your firewall at 192.168.1.1)
+1. Name resolution (DNS) (assuming DNS is handled by your firewall at 192.168.1.1, and that your firewall utilizes DoH for privacy and security)
     ```powershell
     # Replace 192.168.1.1 with where your DNS queries actually need to go
     New-NetFirewallRule -DisplayName "DNS out (Dnscache TCP)" -Dir Out -Action Allow -Protocol TCP -RemotePort 53 -RemoteAddress 192.168.1.1 -Service Dnscache
@@ -317,12 +318,14 @@ We will assume all of your traffic and services will be fronted by a reverse-pro
     New-NetFirewallRule -DisplayName "Caddy ACME/Cloudflare" -Dir Out -Action Allow -Program "C:\Program Files\Caddy\caddy.exe" -Protocol TCP -RemotePort 80,443
     ```
 ### 4.3 Drive Encryption with BitLocker
+> TPM-only is used here because Thunderbolt/DMA is disabled or restricted (Section 3.2), Secure Boot and a BIOS password prevent alternate boot media, and account lockout limits login-screen brute-force. If your machine is a laptop frequently carried in public, consider setting this up with a pre-boot PIN using "manage-bde -on C: -TPMAndPIN -RecoveryPassword" for protection against sophisticated physical attacks.
+
 1.  Run in PowerShell as Administrator:
     ```powershell
     manage-bde -on C: -RecoveryPassword
     ```
-2.  **CRITICAL:** Immediately copy the 48-digit Recovery Key ("Password") and store it in a secure, separate location like a password manager. Failure to do so may result in permanent data loss.
-3.  Check progress with `manage-bde -status C:`.
+2.  **CRITICAL:** Immediately copy the 48-digit Recovery Key ("Password") and store it in a secure, separate location such as a note in your password manager. Failure to do so may result in permanent data loss.
+3.  You can check progress with `manage-bde -status C:`
 
 ### 4.4 Create Standard User Account
 This will be your daily driver. You will log into your workstation as a standard user and only elevate rights when needed (i.e. to install or update a driver, install or uninstall an application).
@@ -372,5 +375,7 @@ Now that you have a hardened machine, remember to logout of the administrator ac
 **Stay Updated:** Regularly check for and install Windows Updates and application patches.
 
 **Make Backups:** Regularly back up your important data to a separate location. A hardened OS does not protect against hardware failure or user error.
+
+**Consider going further:** There are additional steps beyond this guide you may take to enhance security. For example, Windows Defender Application Control (WDAC) provides application allowlisting which can further lockdown public-facing Servers. This is an advanced topic beyond the scope of this guide.
 
 ---
