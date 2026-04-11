@@ -324,7 +324,7 @@ We will assume all of your traffic and services will be fronted by a reverse-pro
 2.  **CRITICAL:** Immediately copy the 48-digit Recovery Key ("Password") and store it in a secure, separate location like a password manager. Failure to do so may result in permanent data loss.
 3.  Check progress with `manage-bde -status C:`.
 
-### 4.4 Create standard user account
+### 4.4 Create Standard User Account
 This will be your daily driver. You will log into your workstation as a standard user and only elevate rights when needed (i.e. to install or update a driver, install or uninstall an application).
 
 From Command Line:
@@ -361,7 +361,7 @@ Go to Settings, "Update & Security", and in "Windows Update" you will click "Che
 
 The baselines are applied, tweaks were made, you may now delete the "C:\Temp" folder to tidy things up.
 
-## 5. Final Words
+## 5.0 Final Words
 
 This guide helps you get to a secure baseline to start from, but it is not a self-maintaining ecosystem. You will need to still need to think and act with security in mind as you use your newly set-up device.
 
