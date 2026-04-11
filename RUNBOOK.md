@@ -319,7 +319,7 @@ We will assume all of your traffic and services will be fronted by a reverse-pro
     New-NetFirewallRule -DisplayName "Caddy ACME/Cloudflare" -Dir Out -Action Allow -Program "C:\Program Files\Caddy\caddy.exe" -Protocol TCP -RemotePort 80,443
     ```
 ### 4.3 Drive Encryption with BitLocker
-> TPM-only is used here because Thunderbolt/DMA is disabled or restricted (Section 3.2), Secure Boot and a BIOS password prevent alternate boot media, and account lockout limits login-screen brute-force. If your machine is a laptop frequently carried in public, consider setting this up with a pre-boot PIN using "manage-bde -on C: -TPMAndPIN -RecoveryPassword" for protection against sophisticated physical attacks.
+> TPM-only is used here because Thunderbolt/DMA is disabled or restricted (Section 3.2), Secure Boot and a BIOS password prevent alternate boot media, and account lockout limits login-screen brute-force. If your machine is a laptop frequently carried in public, consider setting this up with a pre-boot PIN using "manage-bde -on C: -TPMAndPIN -RecoveryPassword" for protection against [sophisticated physical attacks](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/countermeasures).
 
 1.  Run in PowerShell as Administrator:
     ```powershell
