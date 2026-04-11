@@ -324,7 +324,7 @@ We will assume all of your traffic and services will be fronted by a reverse-pro
 2.  **CRITICAL:** Immediately copy the 48-digit Recovery Key ("Password") and store it in a secure, separate location like a password manager. Failure to do so may result in permanent data loss.
 3.  Check progress with `manage-bde -status C:`.
 
-#### 4.4 Create standard user account
+### 4.4 Create standard user account
 This will be your daily driver. You will log into your workstation as a standard user and only elevate rights when needed (i.e. to install or update a driver, install or uninstall an application).
 
 From Command Line:
