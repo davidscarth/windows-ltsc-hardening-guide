@@ -1,7 +1,7 @@
 # Runbook: A Hardening Guide for Windows IoT Enterprise LTSC
-**Version:** 1.1.4
+**Version:** 1.1.5
 
-**Date:** November 15, 2025
+**Date:** April 11, 2026
 
 ---
 ## 1.0 Introduction and Scope
@@ -143,7 +143,7 @@ We will apply two baselines sequentially: first, the general security baseline, 
     <ins>Windows 10:</ins>
     * Download the ["Windows 10 version 21H2 Security Baseline.zip"](https://www.microsoft.com/en-us/download/details.aspx?id=55319) and extract the contents of the `Windows-10-v21H2-Security-Baseline` folder to `C:\Temp\Baselines\Security`.
     * Download the [Restricted Traffic Limited Functionality Baseline from Archive.org](https://web.archive.org/web/20230601002534/https://download.microsoft.com/download/D/9/0/D905766D-FEDA-43E5-86ED-8987CEBD8D89/WindowsRTLFB.zip) (as Microsoft removed the required version). Extract the contents of the `Enterprise` folder from 'Version 21H2_Win10' to `C:\Temp\Baselines\Privacy`.
-        * Filename: `WindowsRTLFB.zip` Size: `743 KB (761,507 bytes)` CRC-32: `be9d9228` MD5: `26d8fe1a999fae5b746dce2ec13ca241`
+        * Filename: `WindowsRTLFB.zip` Size: `743 KB (761,507 bytes)` CRC-32: `be9d9228` MD5: `26d8fe1a999fae5b746dce2ec13ca241` SHA256: `b15eb80fcabc1816f6e503779f23de48119bf5b62be5659ed25a40b7a05f9288`
 
     <ins>Windows 11:</ins>
     * Download the ["Windows 11 v24H2 Security Baseline.zip"](https://www.microsoft.com/en-us/download/details.aspx?id=55319) and extract the contents of the `Windows 11 v24H2 Security Baseline` folder to `C:\Temp\Baselines\Security`.
@@ -183,7 +183,7 @@ We will apply two baselines sequentially: first, the general security baseline, 
     
 6.  **Reboot** the computer.
 
-### 4.2.1 Group Policy Adjustments
+#### 4.2.1 Group Policy Adjustments
 The RTLFB is aggressive at disabling communication with Microsoft, which in turn disables the functionality of some essential components. We must now manually re-enable them. Open the Local Group Policy Editor (gpedit.msc) and configure the following policies as follows:
 
 > **NOTE:** In a future version of this guide, I will include a powershell script to automate the changes.
@@ -210,9 +210,6 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
     * `Computer Configuration\Administrative Templates\Windows Components\BitLocker Drive Encryption`
         * `Choose drive encryption method and cipher strength (Windows 10 (Version 1511) and later)` -> **Enabled**
             * Set encryption method for 'Operating System' and 'Fixed Data Drives' to **"XTS-AES 256-bit"**.
-* **Disable "Block untrusted and unsigned processes that run from USB" (ASR Rule):**
-    * `Computer Configuration\Administrative Templates\Windows Components\Microsoft Defender Antivirus\Microsoft Defender Exploit Guard\Attack Surface Reduction`
-        * `Configure Attack Surface Reduction rules` -> Click 'Show...' -> Delete the rule for `"b2b3f03d-6a65-4f7b-a9c7-1c7ef74a9ba4"` by erasing the Value Name and Value and hit 'OK'.
 * **Disable "Deny write access to fixed drives not protected by BitLocker":**
     * `Computer Configuration\Administrative Templates\Windows Components\BitLocker Drive Encryption\Removable Data Drives`
         * `Deny write access to removable drivers not protected by BitLocker` -> **Not Configured**
@@ -224,8 +221,10 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
         * `Minimum password length` -> **8 characters**
         * `Password must meet complexity requirements` -> **Disabled**
 
-#### Optional Adjustments
-These are quality-of-life changes for end user workstations.
+*NIST 800-63B discourages traditional complexity rules (uppercase, symbols, forced rotation) because they lead to predictable patterns. Instead, it emphasizes password length as the primary measure of strength. You should use passphrases of four or more random words (e.g. "[grove queasy grout icing](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases)") and store them in a password manager such as [KeePassXC](https://keepassxc.org/) (local) or [Bitwarden](https://bitwarden.com/)/[1Password](https://1password.com/) (cloud-based). You may consider raising the minimum password length policy to 15 characters to enforce this in practice.*
+
+#### Optional Adjustments (Workstation)
+These are quality-of-life changes for end user workstations and personal use machines. Not recommended to apply to servers.
 * **Do not include drivers with Windows Updates:**
     * W10: `Computer Configuration\Administrative Templates\Windows Components\Windows Update`
     * W11: `Computer Configuration\Administrative Templates\Windows Components\Windows Update\Manage updates offered from Windows Update`
@@ -241,8 +240,11 @@ These are quality-of-life changes for end user workstations.
     * `Computer Configuration\Administrative Templates\Windows Components\Store`
         * `Disable all apps from Microsoft Store` -> **Not Configured**
         * `Turn off the offer to update to the latest version of Windows` -> **Enabled**
+* **Disable "Block untrusted and unsigned processes that run from USB" (ASR Rule):**
+    * `Computer Configuration\Administrative Templates\Windows Components\Microsoft Defender Antivirus\Microsoft Defender Exploit Guard\Attack Surface Reduction`
+        * `Configure Attack Surface Reduction rules` -> Click 'Show...' -> Delete the rule for `"b2b3f03d-6a65-4f7b-a9c7-1c7ef74a9ba4"` by erasing the Value Name and Value and hit 'OK'.
 
-### 4.2.1 Registry Adjustments
+#### 4.2.2 Registry Adjustments
 A few settings from the baselines are configured within the registry. Use the Registry Editor (`regedit.exe`) to make the following adjustments manually:
 
 #### Security Baseline Tweaks
@@ -258,7 +260,7 @@ A few settings from the baselines are configured within the registry. Use the Re
 * **Re-enable Automatic Root Certificates auto-updates:**
     * Delete registry key (if exists): `HKLM\SOFTWARE\Policies\Microsoft\SystemCertificates\AuthRoot`
 
-### 4.2.2 Firewall State and Configuration
+#### 4.2.3 Firewall State and Configuration
 The baselines leave the Windows Defender Firewall in its default state: inbound traffic is **blocked** unless a rule allows it.
 
 There are some considerations here for *further* hardening, depending on your use case and goals.
@@ -322,15 +324,15 @@ We will assume all of your traffic and services will be fronted by a reverse-pro
 2.  **CRITICAL:** Immediately copy the 48-digit Recovery Key ("Password") and store it in a secure, separate location like a password manager. Failure to do so may result in permanent data loss.
 3.  Check progress with `manage-bde -status C:`.
 
-### 4.5 OS Activation and Housekeeping
+### 4.4 OS Activation and Housekeeping
 **YOU MAY NOW CONNECT TO THE INTERNET**
 
-#### 4.5.1 Time and Power
+#### 4.4.1 Time and Power
 Open the "Date & time" settings and make sure your time zone is correct, and that the time is accurate. You can toggle on "Set time automatically" and then click "Sync now" to get in sync with internet time servers.
 
 Open your "Power & sleep" settings. Change the power plan options to disable sleep when plugged in (for "Make my device sleep after", select "Never").
 
-#### 4.5.2 Activation
+#### 4.4.2 Activation
 The recommended and most secure method for activation is to use a legitimate product key obtained through official channels (e.g., Volume Licensing, Visual Studio Subscription).
 
 1. Open Settings -> Update & Security -> Activation.
@@ -338,13 +340,31 @@ The recommended and most secure method for activation is to use a legitimate pro
 
 For non-production, lab, or testing environments, an alternative procedure using Microsoft Activation Scripts (MAS) is [documented separately](appendix/ALT-ACTIVATION.md). Please refer to that document for instructions.
 
-#### 4.5.3 One-time Windows Update
+#### 4.4.3 One-time Windows Update
 
 We will run Windows update initially to get to the most current security patch level, and rely on auto-updates going forward.
 
 Go to Settings, "Update & Security", and in "Windows Update" you will click "Check for updates". Allow updates to download and install. Once the updates finish, you may click "Restart now" or restart your machine to apply them.
 
-### 5. Final Words
+#### 4.4.4 Create standard user account
+
+This will be your daily driver. You will log into your workstation as a standard user and only elevate rights when needed (i.e. to install or update a driver, install or uninstall an application).
+
+From Command Line:
+```powershell
+# Create the standard user (during this you will be prompted to enter the password)
+net user YourUsername * /add
+
+# Verify they're in Users group only (they are by default)
+net localgroup Users
+```
+From GUI if you prefer (W11):  
+Start > "All" > Settings > Accounts > "Other Users"  
+Select "Add Account"  
+Click "I don't have this person's sign-in information" and then "Add a user without a Microsoft account"  
+Enter a Username and Password. In Windows 11 this prompt forces security questions as well, you should use random diceware passphrases for each and store them in the notes section of your password manager, not real answers.
+
+### 6. Final Words
 
 This guide helps you get to a secure baseline to start from, but it is not a self-maintaining ecosystem. You will need to still need to think and act with security in mind as you use your newly set-up device.
 
