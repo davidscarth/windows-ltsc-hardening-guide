@@ -188,7 +188,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 
 > **NOTE:** In a future version of this guide, I will include a powershell script to automate the changes.
 
-#### Windows RTLFB Adjustments
+**Windows RTLFB Adjustments**
 * **Re-enable Windows Update and Automatic Root Certificates Updates:**
     * `Computer Configuration\Administrative Templates\System\Internet Communication Management\Internet Communication settings`
         * `Turn off access to all Windows Update features` -> **Not Configured**
@@ -205,7 +205,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
     * `Computer Configuration\Administrative Templates\System\Windows Time Service\Time Providers`
         * `Enable Windows NTP Client` -> **Enabled**
 
-#### Security Baseline Adjustments
+**Security Baseline Adjustments**
 * **Enhance BitLocker encryption strength:**
     * `Computer Configuration\Administrative Templates\Windows Components\BitLocker Drive Encryption`
         * `Choose drive encryption method and cipher strength (Windows 10 (Version 1511) and later)` -> **Enabled**
@@ -223,7 +223,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 
 *NIST 800-63B discourages traditional complexity rules (uppercase, symbols, forced rotation) because they lead to predictable patterns. Instead, it emphasizes password length as the primary measure of strength. You should use passphrases of four or more random words (e.g. "[grove queasy grout icing](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases)") and store them in a password manager such as [KeePassXC](https://keepassxc.org/) (local) or [Bitwarden](https://bitwarden.com/)/[1Password](https://1password.com/) (cloud-based). You may consider raising the minimum password length policy to 15 characters to enforce this in practice.*
 
-#### Optional Adjustments (Workstation)
+**Optional Adjustments (Workstation)**
 These are quality-of-life changes for end user workstations and personal use machines. Not recommended to apply to servers.
 * **Do not include drivers with Windows Updates:**
     * W10: `Computer Configuration\Administrative Templates\Windows Components\Windows Update`
@@ -247,7 +247,7 @@ These are quality-of-life changes for end user workstations and personal use mac
 #### 4.2.2 Registry Adjustments
 A few settings from the baselines are configured within the registry. Use the Registry Editor (`regedit.exe`) to make the following adjustments manually:
 
-#### Security Baseline Tweaks
+**Security Baseline Tweaks**
 * **Enable Local Security Authority (LSA) Protection** (On by default in Windows 11, but we need to enable it in Windows 10)
     * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPL` set to `1`
     * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPLBoot` set to `2`
@@ -299,11 +299,11 @@ Now create rules using powershell to enable egress for the following (this will 
    ```
 3. Certificate revocation checks (CRL/OCSP)
     ```powershell
-   New-NetFirewallRule -DisplayName "Certificate revocation checks (CryptSvc)" -Dir Out -Action Allow -Program "%SystemRoot%\System32\svchost.exe" -Service CryptSvc -Protocol TCP -RemotePort 80,443
+   New-NetFirewallRule -DisplayName "Certificate revocation checks (CryptSvc)" -Dir Out -Action Allow -Program "$env:SystemRoot\System32\svchost.exe" -Service CryptSvc -Protocol TCP -RemotePort 80,443
    ```
 4. Windows Update
     ```powershell
-   New-NetFirewallRule -DisplayName "Windows Update (wuauserv)" -Dir Out -Action Allow -Program "%SystemRoot%\System32\svchost.exe" -Service wuauserv -Protocol TCP -RemotePort 80,443
+   New-NetFirewallRule -DisplayName "Windows Update (wuauserv)" -Dir Out -Action Allow -Program "$env:SystemRoot\System32\svchost.exe" -Service wuauserv -Protocol TCP -RemotePort 80,443
    ```
 Now you will create entries for any servers or services that you use.
 We will assume all of your traffic and services will be fronted by a reverse-proxy, so you should only need to forward that additional traffic.
@@ -361,7 +361,7 @@ Go to Settings, "Update & Security", and in "Windows Update" you will click "Che
 
 The baselines are applied, tweaks were made, you may now delete the "C:\Temp" folder to tidy things up.
 
-### 5. Final Words
+## 5. Final Words
 
 This guide helps you get to a secure baseline to start from, but it is not a self-maintaining ecosystem. You will need to still need to think and act with security in mind as you use your newly set-up device.
 
