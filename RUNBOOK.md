@@ -205,11 +205,10 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
         * `Define the order of sources for downloading security intelligence updates` -> **Not Configured**
 * **Re-enable Windows Time service:**
     * `Computer Configuration\Administrative Templates\System\Windows Time Service\Time Providers`
-        * `Enable Windows NTP Client` -> **Enabled**
-     
-To re-enable MS Edge updates, we need to grab the latest [MicrosoftEdgePolicyTemplates.cab](https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/4856b389-7303-4419-8f4b-ee3f72845378/MicrosoftEdgePolicyTemplates.cab) file, and copy the following files:  
-Copy `msedgeupdate.admx` to `C:\Windows\PolicyDefinitions\`  
-Copy `msedgeupdate.adml` to `C:\Windows\PolicyDefinitions\en-US\` then close and reopen gpedit.msc and you will now see the Microsoft Edge Update templates.
+        * `Enable Windows NTP Client` -> **Enabled**   
+> To re-enable MS Edge updates, we need to grab the latest [MicrosoftEdgePolicyTemplates.cab](https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/4856b389-7303-4419-8f4b-ee3f72845378/MicrosoftEdgePolicyTemplates.cab) file, and copy the following files:  
+> Copy `msedgeupdate.admx` to `C:\Windows\PolicyDefinitions\`  
+> Copy `msedgeupdate.adml` to `C:\Windows\PolicyDefinitions\en-US\` then close and reopen gpedit.msc and you will now see the Microsoft Edge Update templates.
 * **Re-enable Microsoft Edge updates:**
     * `Computer Configuration\Administrative Templates\Microsoft Edge Update\Applications`
         * `Update policy override default` -> **Not configured**
