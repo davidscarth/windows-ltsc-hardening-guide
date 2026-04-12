@@ -218,8 +218,8 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 * **Align Password requirements to NIST 800-63B:**
     * `Computer Configuration\Windows Settings\Security Settings\Account Policies\Password Policy`
         * `Enforce password history` -> **Disabled**
-        * `Minimum password age` -> **0**
-        * `Maximum password age` -> **0 days**
+        * `Minimum password age` -> **0 days**
+        * `Maximum password age` -> **0**
         * `Minimum password length` -> **15 characters**
         * `Password must meet complexity requirements` -> **Disabled**
 
