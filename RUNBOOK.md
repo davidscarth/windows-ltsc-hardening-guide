@@ -206,6 +206,15 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
 * **Re-enable Windows Time service:**
     * `Computer Configuration\Administrative Templates\System\Windows Time Service\Time Providers`
         * `Enable Windows NTP Client` -> **Enabled**
+     
+To re-enable MS Edge updates, we need to grab the latest [MicrosoftEdgePolicyTemplates.cab](https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/4856b389-7303-4419-8f4b-ee3f72845378/MicrosoftEdgePolicyTemplates.cab) file, and copy the following files:  
+Copy `msedgeupdate.admx` to `C:\Windows\PolicyDefinitions\`  
+Copy `msedgeupdate.adml` to `C:\Windows\PolicyDefinitions\en-US\` then close and reopen gpedit.msc and you will now see the Microsoft Edge Update templates.
+* **Re-enable Microsoft Edge updates:**
+    * `Computer Configuration\Administrative Templates\Microsoft Edge Update\Applications`
+        * `Update policy override default` -> **Not configured**
+    * `Computer Configuration\Administrative Templates\Microsoft Edge Update\Preferences`
+        * `Auto-update check period override` -> **Not configured**
 
 **Security Baseline Adjustments**
 * **Enhance BitLocker encryption strength:**
@@ -255,10 +264,6 @@ A few settings from the baselines are configured within the registry. Use the Re
     * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPLBoot` set to `2`
 * **Enable opportunistic SMB signing (server side)** (It's already set as required, this is housekeeping)
     * Modify registry DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\enablesecuritysignature` from `0` to `1`.
-* **Re-enable Microsoft Edge updates:**
-    * Delete registry key: `HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate`
-    * Delete registry key: `HKLM\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev`
-    * Modify registry DWORD `HKLM\SOFTWARE\Policies\Microsoft\Edge\ExperimentationAndConfigurationServiceControl` from `0` to `1`.
 * **Re-enable Automatic Root Certificates auto-updates:**
     * Delete registry key (if exists): `HKLM\SOFTWARE\Policies\Microsoft\SystemCertificates\AuthRoot`
 
