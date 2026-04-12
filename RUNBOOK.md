@@ -120,7 +120,7 @@ Get-FileHash -Path "C:\Path\To\Your\en-us_windows_11_iot_enterprise_ltsc_2024_x6
         * Use a strong, randomly generated passphrase and store it in your password manager.
         * For the security questions, use a random password generator for the answers and store them securely.
             * To avoid the security questions requirement, instead leave the password **blank** during setup, and create one after first boot. You will find it in Settings > Accounts > Sign-in options > Password. You can make the required password hint a single space " " to represent empty.
-    * **Privacy settings:** Toggle each option off and select **Accept**.
+    * **Privacy settings:** Toggle each option to "Off" and select **Accept**.
 11. **If you skipped the OOBE password screen to avoid filling in security questions, you must set a password.** You can add one by going to Settings > Accounts > Sign-in options > Password. Store it within your password manager.
 ---
 ## 4.0 Post-Installation Hardening and Configuration
@@ -173,7 +173,7 @@ We will apply two baselines sequentially: first, the general security baseline, 
     cd C:\Temp\Baselines\Security\Scripts
     .\Baseline-LocalInstall.ps1 -Win11NonDomainJoined
     ```
-    Do not close the PowerShell window yet, use the same window and proceed to the next step.
+    Do not close the PowerShell window yet, use the same window and proceed to the next step. You may notice a BitLocker popup, skip encrypting for now, we will do it after applying tweaks in a later step.
     
 4.  **Apply Restricted Traffic Baseline:**
     ```powershell
