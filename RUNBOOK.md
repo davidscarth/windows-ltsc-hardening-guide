@@ -173,7 +173,7 @@ We will apply two baselines sequentially: first, the general security baseline, 
     cd C:\Temp\Baselines\Security\Scripts
     .\Baseline-LocalInstall.ps1 -Win11NonDomainJoined
     ```
-    Do not close the PowerShell window yet, use the same window and proceed to the next step. You may notice a BitLocker popup, skip encrypting for now, we will do it after applying tweaks in a later step.
+    Do not close the PowerShell window yet, use the same window and proceed to the next step. You may notice a BitLocker popup if you have a USB flash drive connected, just click "Don't encrypt this drive".
     
 4.  **Apply Restricted Traffic Baseline:**
     ```powershell
@@ -199,6 +199,7 @@ The RTLFB is aggressive at disabling communication with Microsoft, which in turn
     * W11: `Computer Configuration\Administrative Templates\Windows Components\Windows Update\Manage updates offered from Windows Server Update Service`
         * `Specify intranet Microsoft update service location` -> **Not Configured**
         * `Do not connect to any Windows Update Internet locations` -> **Not Configured**
+    * `User Configuration > Administrative Templates > Windows Components > Windows Update > Remove access to use all Windows Update features` -> **Not Configured**
 * **Re-enable Defender signature updates:**
     * `Computer Configuration\Administrative Templates\Windows Components\Microsoft Defender Antivirus\Security Intelligence Updates`
         * `Define file shares for downloading security intelligence updates` -> **Not Configured**
