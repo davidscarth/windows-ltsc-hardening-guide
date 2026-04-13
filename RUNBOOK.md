@@ -1,7 +1,7 @@
 # Runbook: A Hardening Guide for Windows IoT Enterprise LTSC
-**Version:** 1.2.0
+**Version:** 1.2.1
 
-**Date:** April 11, 2026
+**Date:** April 12, 2026
 
 ---
 ## 1.0 Introduction and Scope
@@ -262,9 +262,11 @@ A few settings from the baselines are configured within the registry. Use the Re
     * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPL` set to `1`
     * Create DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPLBoot` set to `2`
 * **Enable opportunistic SMB signing (server side)** (It's already set as required, this is housekeeping)
-    * Modify registry DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\enablesecuritysignature` from `0` to `1`.
+    * Modify DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\enablesecuritysignature` from `0` to `1`.
 * **Re-enable Automatic Root Certificates auto-updates:**
     * Delete registry key (if exists): `HKLM\SOFTWARE\Policies\Microsoft\SystemCertificates\AuthRoot`
+**Privacy Baseline Tweaks**
+    * Modify String `HKLM\SYSTEM\CurrentControlSet\Services\W32Time\Parameters\Type` from `NoSync` to `NTP`.
 
 #### 4.2.3 Firewall State and Configuration
 The baselines leave the Windows Defender Firewall in its default state: inbound traffic is **blocked** unless a rule allows it.
