@@ -266,7 +266,9 @@ A few settings from the baselines are configured within the registry. Use the Re
     * Modify DWORD `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\enablesecuritysignature` from `0` to `1`.
 * **Re-enable Automatic Root Certificates auto-updates:**
     * Delete registry key (if exists): `HKLM\SOFTWARE\Policies\Microsoft\SystemCertificates\AuthRoot`
+
 **Privacy Baseline Tweaks**
+* **Allows Windows to sync time online:**
     * Modify String `HKLM\SYSTEM\CurrentControlSet\Services\W32Time\Parameters\Type` from `NoSync` to `NTP`.
 
 #### 4.2.3 Firewall State and Configuration
